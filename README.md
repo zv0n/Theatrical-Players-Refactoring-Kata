@@ -52,6 +52,16 @@ Practice the Kata in common Mob session
 4. All commits are pushed to the common repository
 5. Drivers are switched and new driver starts with the point 1 (pull + sharing his screen)
 
+Get feedback on your Mob session
+----------------
+* get feedback on your code -> just create a Pull Request (or send a link to your public repo with all the changes) and contact us
+* get feedback on format of the session -> just contact us and describe, how we can help you
+
+**Contact info:**
+* Milan Schwarz -> milan.schwarz@ysoft.com
+* Radim Göth -> radim.goeth@ysoft.com
+* Tomáš Líška -> tomas.liska@ysoft.com
+
 Best practices
 ====================================
 * Do as small as possible commits, so you can easily revert the changes if you go a wrong way anytime
@@ -59,3 +69,6 @@ Best practices
 * I recommend to start with 7 minutes for switch a Driver (and experiment with that during the next session)
 * Experiment with navigators (e.g. just one can navigate or everybody navigates)
 * Have a fun and learn something new from others!
+
+Do not hesitate to mention your activity and provide link on your code during job interview in YSoft!
+====================================
