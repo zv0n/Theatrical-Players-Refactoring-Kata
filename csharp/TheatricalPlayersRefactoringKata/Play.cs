@@ -7,8 +7,8 @@ namespace TheatricalPlayersRefactoringKata
         public PlayType Type { get; set; }
 
         public Play(string name, PlayType type) {
-            this.Name = name;
-            this.Type = type;
+            Name = name;
+            Type = type;
         }
     }
 }

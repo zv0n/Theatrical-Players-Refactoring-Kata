@@ -33,7 +33,10 @@ namespace TheatricalPlayersRefactoringKata
                 PrintType.Text, ("Statement for {0}\n", "  {0}: {1:C} ({2} seats)\n", "Amount owed is {0:C}\n", "You earned {0} credits\n")
             },
             {
-                PrintType.HTML, ("<html>\n  <h1>Statement for {0}</h1>\n  <table>\n    <tr><th>play</th><th>seats</th><th>cost</th></tr>\n", "    <tr><td>{0}</td><td>{2}</td><td>{1:C}</td></tr>\n", "  </table>\n  <p>Amount owed is <em>{0:C}</em></p>\n", "  <p>You earned <em>{0}</em> credits</p>\n</html>")
+                PrintType.HTML, ("<html>\n  <h1>Statement for {0}</h1>\n  <table>\n    <tr><th>play</th><th>seats</th><th>cost</th></tr>\n",
+                    "    <tr><td>{0}</td><td>{2}</td><td>{1:C}</td></tr>\n",
+                    "  </table>\n  <p>Amount owed is <em>{0:C}</em></p>\n",
+                    "  <p>You earned <em>{0}</em> credits</p>\n</html>")
             }
         };
 

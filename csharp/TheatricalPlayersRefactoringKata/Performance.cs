@@ -8,8 +8,8 @@ namespace TheatricalPlayersRefactoringKata
 
         public Performance(string playID, int audience)
         {
-            this.PlayID = playID;
-            this.Audience = audience;
+            PlayID = playID;
+            Audience = audience;
         }
 
     }

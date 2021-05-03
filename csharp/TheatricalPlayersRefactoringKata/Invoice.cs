@@ -10,8 +10,8 @@ namespace TheatricalPlayersRefactoringKata
 
         public Invoice(string customer, List<Performance> performance)
         {
-            this.Customer = customer;
-            this.Performances = performance;
+            Customer = customer;
+            Performances = performance;
         }
 
     }
