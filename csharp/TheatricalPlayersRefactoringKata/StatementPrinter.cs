@@ -6,6 +6,12 @@ namespace TheatricalPlayersRefactoringKata
 {
     public class StatementPrinter
     {
+        private Dictionary<PrintType, List<String>> TextFormats = new Dictionary<PrintType, List<string>>()
+        {
+            {
+                PrintType.Text, new List<string>() {"Statement for {0}\n", "  {0}: {1:C} ({2} seats)\n", "Amount owed is {0:C}\n", "You earned {0} credits\n"}
+            }
+        };
         public string Print(Invoice invoice, Dictionary<string, Play> plays, PrintType type = PrintType.Text)
         {
             var totalAmount = 0;
