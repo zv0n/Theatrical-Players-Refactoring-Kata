@@ -23,8 +23,8 @@ namespace TheatricalPlayersRefactoringKata
 
         private readonly Dictionary<PlayType, CostComputer> CostFunctions = new()
         {
-            {PlayType.Tragedy, computeTragedy},
-            {PlayType.Comedy, computeComedy}
+            {PlayType.Tragedy, ComputeTragedy},
+            {PlayType.Comedy, ComputeComedy}
         };
 
         private readonly Dictionary<PrintType, (string statement, string playInfo, string price, string credits)> TextFormats = new()
@@ -34,7 +34,7 @@ namespace TheatricalPlayersRefactoringKata
             }
         };
 
-        private static int computeTragedy(Performance performance, ref int credits)
+        private static int ComputeTragedy(Performance performance, ref int credits)
         {
             var performanceAmount = 40000;
             if (performance.Audience > 30) {
@@ -44,7 +44,7 @@ namespace TheatricalPlayersRefactoringKata
             return performanceAmount;
         }
 
-        private static int computeComedy(Performance performance, ref int credits)
+        private static int ComputeComedy(Performance performance, ref int credits)
         {
             var performanceAmount = 30000;
             if (performance.Audience > 20) {
