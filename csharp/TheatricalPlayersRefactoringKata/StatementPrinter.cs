@@ -6,13 +6,22 @@ namespace TheatricalPlayersRefactoringKata
 {
     public class StatementPrinter
     {
+        private PrintType printType;
+
+        public StatementPrinter(PrintType printType)
+        {
+            this.printType = printType;
+        }
+
         private readonly Dictionary<PrintType, (string statement, string playInfo, string price, string credits)> TextFormats = new()
         {
             {
                 PrintType.Text, ("Statement for {0}\n", "  {0}: {1:C} ({2} seats)\n", "Amount owed is {0:C}\n", "You earned {0} credits\n")
             }
         };
-        public string Print(Invoice invoice, Dictionary<string, Play> plays, PrintType printType = PrintType.Text)
+
+
+        public string Print(Invoice invoice, Dictionary<string, Play> plays)
         {
             var totalAmount = 0;
             var credits = 0;
