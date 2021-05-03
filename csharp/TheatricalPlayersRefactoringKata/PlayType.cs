@@ -4,5 +4,7 @@ namespace TheatricalPlayersRefactoringKata
     {
         Tragedy,
         Comedy,
+        History,
+        Pastoral,
     }
 }
