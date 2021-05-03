@@ -19,6 +19,14 @@ namespace TheatricalPlayersRefactoringKata
         {
         }
 
+        private delegate int CostComputer(Performance performance, ref int credits);
+
+        private readonly Dictionary<PlayType, CostComputer> CostFunctions = new()
+        {
+            {PlayType.Tragedy, computeTragedy},
+            {PlayType.Comedy, computeComedy}
+        };
+
         private readonly Dictionary<PrintType, (string statement, string playInfo, string price, string credits)> TextFormats = new()
         {
             {
@@ -26,25 +34,27 @@ namespace TheatricalPlayersRefactoringKata
             }
         };
 
-        private void computeTragedy(ref int performanceAmount, Performance performance, ref int credits)
+        private static int computeTragedy(Performance performance, ref int credits)
         {
-            performanceAmount = 40000;
+            var performanceAmount = 40000;
             if (performance.Audience > 30) {
                 performanceAmount += 1000 * (performance.Audience - 30);
             }
+
+            return performanceAmount;
         }
 
-        private void computeComedy(ref int performanceAmount, Performance performance, ref int credits)
+        private static int computeComedy(Performance performance, ref int credits)
         {
-            performanceAmount = 30000;
+            var performanceAmount = 30000;
             if (performance.Audience > 20) {
                 performanceAmount += 10000 + 500 * (performance.Audience - 20);
             }
             performanceAmount += 300 * performance.Audience;
             // add extra credit for every ten comedy attendees
             credits += (int)Math.Floor((decimal)performance.Audience / 5);
+            return performanceAmount;
         }
-
 
         public string Print(Invoice invoice, Dictionary<string, Play> plays)
         {
@@ -55,18 +65,13 @@ namespace TheatricalPlayersRefactoringKata
             foreach(var performance in invoice.Performances) 
             {
                 var play = plays[performance.PlayID];
-                var performanceAmount = 0;
-                switch (play.Type) 
+                if (!CostFunctions.ContainsKey(play.Type))
                 {
-                    case PlayType.Tragedy:
-                        computeTragedy(ref performanceAmount, performance, ref credits);
-                        break;
-                    case PlayType.Comedy:
-                        computeComedy(ref performanceAmount, performance, ref credits);
-                        break;
-                    default:
-                        throw new Exception("unknown type: " + play.Type);
+                    throw new Exception("unknown type: " + play.Type);
                 }
+
+                var performanceAmount = CostFunctions[play.Type](performance, ref credits);
+                
                 // add volume credits
                 credits += Math.Max(performance.Audience - 30, 0);
 
