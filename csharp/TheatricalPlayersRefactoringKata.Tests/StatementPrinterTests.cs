@@ -22,7 +22,7 @@ namespace TheatricalPlayersRefactoringKata.Tests
                 new Performance("as-like", 35),
                 new Performance("othello", 40)});
             
-            StatementPrinter statementPrinter = new StatementPrinter(PrintType.Text);
+            StatementPrinter statementPrinter = new StatementPrinter();
             var result = statementPrinter.Print(invoice, plays);
             
             Approvals.Verify(result);
@@ -41,7 +41,7 @@ namespace TheatricalPlayersRefactoringKata.Tests
                 new Performance("as-like", 35),
                 new Performance("othello", 40)});
             
-            StatementPrinter statementPrinter = new StatementPrinter(PrintType.Text);
+            StatementPrinter statementPrinter = new StatementPrinter();
             
             // Not implemented yet
             // var result = statementPrinter.PrintAsHtml(invoice, plays);
@@ -59,7 +59,7 @@ namespace TheatricalPlayersRefactoringKata.Tests
             Invoice invoice = new Invoice("BigCoII", new List<Performance>{new Performance("henry-v", 53),
                 new Performance("as-like", 55)});
             
-            StatementPrinter statementPrinter = new StatementPrinter(PrintType.Text);
+            StatementPrinter statementPrinter = new StatementPrinter();
 
             Assert.Throws<Exception>(() => statementPrinter.Print(invoice, plays));
         }

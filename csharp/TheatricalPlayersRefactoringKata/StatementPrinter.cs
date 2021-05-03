@@ -9,17 +9,13 @@ namespace TheatricalPlayersRefactoringKata
         private readonly PrintType printType;
         private readonly CultureInfo cultureInfo;
 
-        public StatementPrinter(PrintType printType, CultureInfo cultureInfo)
+        public StatementPrinter(CultureInfo cultureInfo, PrintType printType = PrintType.Text)
         {
             this.printType = printType;
             this.cultureInfo = cultureInfo;
         }
 
-        public StatementPrinter(PrintType printType) : this(printType, new CultureInfo("en-US"))
-        {
-        }
-
-        public StatementPrinter() : this(PrintType.Text, new CultureInfo("en-US"))
+        public StatementPrinter() : this(new CultureInfo("en-US"))
         {
         }
 
