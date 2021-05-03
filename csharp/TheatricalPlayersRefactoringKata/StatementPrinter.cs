@@ -26,6 +26,25 @@ namespace TheatricalPlayersRefactoringKata
             }
         };
 
+        private void computeTragedy(ref int performanceAmount, Performance performance, ref int credits)
+        {
+            performanceAmount = 40000;
+            if (performance.Audience > 30) {
+                performanceAmount += 1000 * (performance.Audience - 30);
+            }
+        }
+
+        private void computeComedy(ref int performanceAmount, Performance performance, ref int credits)
+        {
+            performanceAmount = 30000;
+            if (performance.Audience > 20) {
+                performanceAmount += 10000 + 500 * (performance.Audience - 20);
+            }
+            performanceAmount += 300 * performance.Audience;
+            // add extra credit for every ten comedy attendees
+            credits += (int)Math.Floor((decimal)performance.Audience / 5);
+        }
+
 
         public string Print(Invoice invoice, Dictionary<string, Play> plays)
         {
@@ -40,19 +59,10 @@ namespace TheatricalPlayersRefactoringKata
                 switch (play.Type) 
                 {
                     case PlayType.Tragedy:
-                        performanceAmount = 40000;
-                        if (performance.Audience > 30) {
-                            performanceAmount += 1000 * (performance.Audience - 30);
-                        }
+                        computeTragedy(ref performanceAmount, performance, ref credits);
                         break;
                     case PlayType.Comedy:
-                        performanceAmount = 30000;
-                        if (performance.Audience > 20) {
-                            performanceAmount += 10000 + 500 * (performance.Audience - 20);
-                        }
-                        performanceAmount += 300 * performance.Audience;
-                        // add extra credit for every ten comedy attendees
-                        credits += (int)Math.Floor((decimal)performance.Audience / 5);
+                        computeComedy(ref performanceAmount, performance, ref credits);
                         break;
                     default:
                         throw new Exception("unknown type: " + play.Type);
