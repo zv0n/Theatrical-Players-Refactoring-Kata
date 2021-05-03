@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using ApprovalTests;
 using ApprovalTests.Reporters;
 using NUnit.Framework;
@@ -41,11 +42,11 @@ namespace TheatricalPlayersRefactoringKata.Tests
                 new Performance("as-like", 35),
                 new Performance("othello", 40)});
             
-            StatementPrinter statementPrinter = new StatementPrinter();
+            StatementPrinter statementPrinter = new StatementPrinter(new CultureInfo("en-US"), PrintType.HTML);
             
             // Not implemented yet
-            // var result = statementPrinter.PrintAsHtml(invoice, plays);
-            // Approvals.Verify(result);
+            var result = statementPrinter.Print(invoice, plays);
+            Approvals.Verify(result);
         }
 
         [Test]
