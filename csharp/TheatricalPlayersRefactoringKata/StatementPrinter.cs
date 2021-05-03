@@ -51,14 +51,14 @@ namespace TheatricalPlayersRefactoringKata
                             performanceAmount += 10000 + 500 * (performance.Audience - 20);
                         }
                         performanceAmount += 300 * performance.Audience;
+                        // add extra credit for every ten comedy attendees
+                        credits += (int)Math.Floor((decimal)performance.Audience / 5);
                         break;
                     default:
                         throw new Exception("unknown type: " + play.Type);
                 }
                 // add volume credits
                 credits += Math.Max(performance.Audience - 30, 0);
-                // add extra credit for every ten comedy attendees
-                if (play.Type == PlayType.Comedy) credits += (int)Math.Floor((decimal)performance.Audience / 5);
 
                 // print line for this order
                 result += String.Format(cultureInfo, TextFormats[printType].playInfo, play.Name, Convert.ToDecimal(performanceAmount / 100), performance.Audience);
