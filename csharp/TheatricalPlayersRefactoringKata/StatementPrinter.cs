@@ -46,11 +46,10 @@ namespace TheatricalPlayersRefactoringKata
 
         private static int ComputeComedy(Performance performance, ref int credits)
         {
-            var performanceAmount = 30000;
+            var performanceAmount = 30000 + 300 * performance.Audience;
             if (performance.Audience > 20) {
                 performanceAmount += 10000 + 500 * (performance.Audience - 20);
             }
-            performanceAmount += 300 * performance.Audience;
             // add extra credit for every ten comedy attendees
             credits += (int)Math.Floor((decimal)performance.Audience / 5);
             return performanceAmount;
