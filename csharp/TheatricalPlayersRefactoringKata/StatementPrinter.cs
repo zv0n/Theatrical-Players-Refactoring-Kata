@@ -26,7 +26,7 @@ namespace TheatricalPlayersRefactoringKata
             var totalAmount = 0;
             var credits = 0;
             var result = string.Format(TextFormats[printType].statement, invoice.Customer);
-            CultureInfo cultureInfo = new CultureInfo("en-US");
+            var cultureInfo = new CultureInfo("en-US");
 
             foreach(var performance in invoice.Performances) 
             {
