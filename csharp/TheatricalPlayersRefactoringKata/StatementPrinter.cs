@@ -61,11 +61,11 @@ namespace TheatricalPlayersRefactoringKata
                 credits += Math.Max(performance.Audience - 30, 0);
 
                 // print line for this order
-                result += String.Format(cultureInfo, TextFormats[printType].playInfo, play.Name, Convert.ToDecimal(performanceAmount / 100), performance.Audience);
+                result += string.Format(cultureInfo, TextFormats[printType].playInfo, play.Name, Convert.ToDecimal(performanceAmount / 100), performance.Audience);
                 totalAmount += performanceAmount;
             }
-            result += String.Format(cultureInfo, TextFormats[printType].price, Convert.ToDecimal(totalAmount / 100));
-            result += String.Format(TextFormats[printType].credits, credits);
+            result += string.Format(cultureInfo, TextFormats[printType].price, Convert.ToDecimal(totalAmount / 100));
+            result += string.Format(TextFormats[printType].credits, credits);
             return result;
         }
     }
