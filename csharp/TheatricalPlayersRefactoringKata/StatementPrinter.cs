@@ -6,11 +6,21 @@ namespace TheatricalPlayersRefactoringKata
 {
     public class StatementPrinter
     {
-        private PrintType printType;
+        private readonly PrintType printType;
+        private readonly CultureInfo cultureInfo;
 
-        public StatementPrinter(PrintType printType)
+        public StatementPrinter(PrintType printType, CultureInfo cultureInfo)
         {
             this.printType = printType;
+            this.cultureInfo = cultureInfo;
+        }
+
+        public StatementPrinter(PrintType printType) : this(printType, new CultureInfo("en-US"))
+        {
+        }
+
+        public StatementPrinter() : this(PrintType.Text, new CultureInfo("en-US"))
+        {
         }
 
         private readonly Dictionary<PrintType, (string statement, string playInfo, string price, string credits)> TextFormats = new()
@@ -26,7 +36,6 @@ namespace TheatricalPlayersRefactoringKata
             var totalAmount = 0;
             var credits = 0;
             var result = string.Format(TextFormats[printType].statement, invoice.Customer);
-            var cultureInfo = new CultureInfo("en-US");
 
             foreach(var performance in invoice.Performances) 
             {
