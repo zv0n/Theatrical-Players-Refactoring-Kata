@@ -6,7 +6,7 @@ namespace TheatricalPlayersRefactoringKata
 {
     public class StatementPrinter
     {
-        public string Print(Invoice invoice, Dictionary<string, Play> plays)
+        public string Print(Invoice invoice, Dictionary<string, Play> plays, PrintType type = PrintType.Text)
         {
             var totalAmount = 0;
             var volumeCredits = 0;
