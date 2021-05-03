@@ -6,17 +6,17 @@ namespace TheatricalPlayersRefactoringKata
 {
     public class StatementPrinter
     {
-        private Dictionary<PrintType, List<String>> TextFormats = new Dictionary<PrintType, List<string>>()
+        private readonly Dictionary<PrintType, (string statement, string playInfo, string price, string credits)> TextFormats = new()
         {
             {
-                PrintType.Text, new List<string>() {"Statement for {0}\n", "  {0}: {1:C} ({2} seats)\n", "Amount owed is {0:C}\n", "You earned {0} credits\n"}
+                PrintType.Text, ("Statement for {0}\n", "  {0}: {1:C} ({2} seats)\n", "Amount owed is {0:C}\n", "You earned {0} credits\n")
             }
         };
-        public string Print(Invoice invoice, Dictionary<string, Play> plays, PrintType type = PrintType.Text)
+        public string Print(Invoice invoice, Dictionary<string, Play> plays, PrintType printType = PrintType.Text)
         {
             var totalAmount = 0;
             var volumeCredits = 0;
-            var result = string.Format("Statement for {0}\n", invoice.Customer);
+            var result = string.Format(TextFormats[printType].statement, invoice.Customer);
             CultureInfo cultureInfo = new CultureInfo("en-US");
 
             foreach(var perf in invoice.Performances) 
@@ -47,11 +47,11 @@ namespace TheatricalPlayersRefactoringKata
                 if ("comedy" == play.Type) volumeCredits += (int)Math.Floor((decimal)perf.Audience / 5);
 
                 // print line for this order
-                result += String.Format(cultureInfo, "  {0}: {1:C} ({2} seats)\n", play.Name, Convert.ToDecimal(thisAmount / 100), perf.Audience);
+                result += String.Format(cultureInfo, TextFormats[printType].playInfo, play.Name, Convert.ToDecimal(thisAmount / 100), perf.Audience);
                 totalAmount += thisAmount;
             }
-            result += String.Format(cultureInfo, "Amount owed is {0:C}\n", Convert.ToDecimal(totalAmount / 100));
-            result += String.Format("You earned {0} credits\n", volumeCredits);
+            result += String.Format(cultureInfo, TextFormats[printType].price, Convert.ToDecimal(totalAmount / 100));
+            result += String.Format(TextFormats[printType].price, volumeCredits);
             return result;
         }
     }
