@@ -44,7 +44,6 @@ namespace TheatricalPlayersRefactoringKata.Tests
             
             StatementPrinter statementPrinter = new StatementPrinter(new CultureInfo("en-US"), PrintType.HTML);
             
-            // Not implemented yet
             var result = statementPrinter.Print(invoice, plays);
             Approvals.Verify(result);
         }

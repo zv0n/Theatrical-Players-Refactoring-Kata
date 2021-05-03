@@ -21,13 +21,13 @@ namespace TheatricalPlayersRefactoringKata
 
         private delegate int CostComputer(Performance performance, ref int credits);
 
-        private readonly Dictionary<PlayType, CostComputer> CostFunctions = new()
+        private readonly Dictionary<PlayType, CostComputer> costFunctions = new()
         {
             {PlayType.Tragedy, ComputeTragedy},
             {PlayType.Comedy, ComputeComedy}
         };
 
-        private readonly Dictionary<PrintType, (string statement, string playInfo, string price, string credits)> TextFormats = new()
+        private readonly Dictionary<PrintType, (string statement, string playInfo, string price, string credits)> textFormats = new()
         {
             {
                 PrintType.Text, ("Statement for {0}\n", "  {0}: {1:C} ({2} seats)\n", "Amount owed is {0:C}\n", "You earned {0} credits\n")
@@ -62,27 +62,27 @@ namespace TheatricalPlayersRefactoringKata
         {
             var totalAmount = 0;
             var credits = 0;
-            var result = string.Format(TextFormats[printType].statement, invoice.Customer);
+            var result = string.Format(textFormats[printType].statement, invoice.Customer);
 
             foreach(var performance in invoice.Performances) 
             {
                 var play = plays[performance.PlayID];
-                if (!CostFunctions.ContainsKey(play.Type))
+                if (!costFunctions.ContainsKey(play.Type))
                 {
                     throw new Exception("unknown type: " + play.Type);
                 }
 
-                var performanceAmount = CostFunctions[play.Type](performance, ref credits);
+                var performanceAmount = costFunctions[play.Type](performance, ref credits);
                 
                 // add volume credits
                 credits += Math.Max(performance.Audience - 30, 0);
 
                 // print line for this order
-                result += string.Format(cultureInfo, TextFormats[printType].playInfo, play.Name, Convert.ToDecimal(performanceAmount / 100), performance.Audience);
+                result += string.Format(cultureInfo, textFormats[printType].playInfo, play.Name, Convert.ToDecimal(performanceAmount / 100), performance.Audience);
                 totalAmount += performanceAmount;
             }
-            result += string.Format(cultureInfo, TextFormats[printType].price, Convert.ToDecimal(totalAmount / 100));
-            result += string.Format(TextFormats[printType].credits, credits);
+            result += string.Format(cultureInfo, textFormats[printType].price, Convert.ToDecimal(totalAmount / 100));
+            result += string.Format(textFormats[printType].credits, credits);
             return result;
         }
     }
